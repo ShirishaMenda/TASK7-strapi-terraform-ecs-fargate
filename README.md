@@ -15,7 +15,7 @@ Created a new project folder.
 
 Inside that folder, created a Strapi application:
 
-npx create-strapi-app strapi-app
+# npx create-strapi-app strapi-app
 
 Configured Strapi to use PostgreSQL instead of SQLite.
 
@@ -45,43 +45,31 @@ ECR repository was successfully created in AWS.
 Created a Dockerfile for Strapi.
 
 Built Docker image:
-
-docker build -t strapi-app .
+# docker build -t strapi-app .
 
 Tagged the image:
-
-docker tag strapi-app:latest <ecr-repo-url>:latest
+# docker tag strapi-app:latest <ecr-repo-url>:latest
 
 Logged into ECR:
-
-aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin <ecr-repo-url>
+# aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin <ecr-repo-url>
 
 Pushed image to ECR:
-
-docker push <ecr-repo-url>:latest
+# docker push <ecr-repo-url>:latest
 
 
 # Step 4: Deploy Infrastructure Using Terraform
 
 Terraform creates:
 
-VPC
-
-Subnets
-
-Internet Gateway
-
-Security Groups
-
-RDS PostgreSQL
-
-ECS Cluster
-
-ECS Task Definition
-
-ECS Service
-
-Application Load Balancer
+- VPC
+- Subnets
+- Internet Gateway
+- Security Groups
+- RDS PostgreSQL
+- ECS Cluster
+- ECS Task Definition
+- ECS Service
+- Application Load Balancer
 
 Commands used:
 
@@ -89,32 +77,28 @@ terraform apply
 
 After deployment:
 
-Verified ECS service is running.
-
-Checked that tasks are healthy.
-
-Confirmed RDS is available.
-
-Verified ALB target group is healthy.
+- Verified ECS service is running.
+- Checked that tasks are healthy.
+- Confirmed RDS is available.
+-Verified ALB target group is healthy.
 
 
 # Step 5: Configure GitHub Actions (CI/CD)
 
 Added workflow file inside:
 
-.github/workflows/deploy.yml
+.github/workflows
+- ci.yaml
+- cd.yaml
 
 Workflow performs:
 
-Build Docker image
+-Build Docker image
+-Tag image
+-Push image to ECR
+-Update ECS service
 
-Tag image
-
-Push image to ECR
-
-Update ECS service
-
-Added AWS credentials as GitHub Secrets:
+# Added AWS credentials as GitHub Secrets:
 
 AWS_ACCESS_KEY_ID
 
@@ -123,7 +107,6 @@ AWS_SECRET_ACCESS_KEY
 AWS_REGION
 
 Pushed code to GitHub repository.
-
 Once pushed:
 
 GitHub Actions automatically triggered.
