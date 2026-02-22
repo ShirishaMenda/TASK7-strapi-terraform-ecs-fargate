@@ -24,7 +24,7 @@ jobs:
       id: login-ecr
 
     - name: Build Docker Image
-      run: docker build -t strapi-app ./backend
+      run: docker build -t strapi ./backend
 
     - name: Tag & Push Image to ECR
       run: |
