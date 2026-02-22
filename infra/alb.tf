@@ -13,7 +13,7 @@ resource "aws_lb_target_group" "tg" {
   vpc_id      = aws_vpc.main.id
 
   health_check {
-    path                = "/"
+    path                = "/admin"
     protocol            = "HTTP"
     port                = "traffic-port"
     interval            = 15
